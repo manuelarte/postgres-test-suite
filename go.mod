@@ -1,4 +1,4 @@
-module postgres-test-suite
+module github.com/manuelarte/postgres-test-suite
 
 go 1.21
 

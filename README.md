@@ -4,6 +4,12 @@ When doing a test that involves reading/writing to a database, it's good to test
 This library allows you to instantiate a PostgreSQL database for your test suite, and it will automatically start and stop at the beginning and enf of your test.
 It works using the test [suite](https://pkg.go.dev/github.com/stretchr/testify/suite) functionality in GO, in which the database is starting at the beginning of the test suite, then all the tests are run, and it will stop at the end.
 
+To use this library:
+
+``go
+go get github.com/manuelarte/postgres-test-suite
+``
+
 ## Example ##
 
 Check the example in the file [example_test.go](example_test.go):
