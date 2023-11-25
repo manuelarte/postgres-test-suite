@@ -3,7 +3,6 @@ package postgres_test_suite
 import (
 	"context"
 	"fmt"
-	"net"
 	"testing"
 
 	embeddedpostgres "github.com/fergusstrange/embedded-postgres"
@@ -18,11 +17,7 @@ type EPClosedAfter struct {
 }
 
 func TestEPClosedAfter(t *testing.T) {
-	l, err := net.Listen("tcp", ":0")
-	if err != nil {
-		t.Error(err)
-	}
-	port := uint32(l.Addr().(*net.TCPAddr).Port)
+	port := uint32(46355)
 	testSuite := &EPClosedAfter{
 		PostgresTestSuite: &PostgresTestSuite{PostgresConf: embeddedpostgres.DefaultConfig().Port(port)},
 		port:              port,
@@ -30,7 +25,7 @@ func TestEPClosedAfter(t *testing.T) {
 	suite.Run(t, testSuite)
 	ctx := context.Background()
 	connString := fmt.Sprintf("postgresql://postgres:postgres@localhost:%d/postgres", testSuite.port)
-	_, err = pgx.Connect(ctx, connString)
+	_, err := pgx.Connect(ctx, connString)
 	assert.Error(testSuite.T(), err, "Embedded postgres should be close after a test panic")
 }
 

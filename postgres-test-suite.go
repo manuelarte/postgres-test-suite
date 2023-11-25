@@ -20,7 +20,7 @@ func (psuite *PostgresTestSuite) SetupSuite() {
 	psuite.ep = psuite.getEmbeddedPostgres()
 	err := psuite.ep.Start()
 	if err != nil {
-		psuite.Error(err, "Can't start embedded postgres database")
+		psuite.T().Fatal(err)
 	}
 	go closeWithSignal(psuite, psuite.ep)
 }
