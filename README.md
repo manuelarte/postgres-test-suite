@@ -8,7 +8,7 @@ It works using the test [suite](https://pkg.go.dev/github.com/stretchr/testify/s
 
 To use this library:
 
-```go
+```
 
 go get github.com/manuelarte/postgres-test-suite
 
