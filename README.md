@@ -1,3 +1,5 @@
+[![Go](https://github.com/manuelarte/postgres-test-suite/actions/workflows/go.yml/badge.svg)](https://github.com/manuelarte/postgres-test-suite/actions/workflows/go.yml)
+
 # PostgreSQL Test suite #
 
 When doing a test that involves reading/writing to a database, it's good to test as close as possible to the production code.
