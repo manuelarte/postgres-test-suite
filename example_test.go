@@ -3,7 +3,6 @@ package postgres_test_suite
 import (
 	"context"
 	"fmt"
-	"net"
 	"testing"
 
 	embeddedpostgres "github.com/fergusstrange/embedded-postgres"
@@ -19,11 +18,7 @@ type ExampleTestSuite struct {
 }
 
 func TestExampleTestSuite(t *testing.T) {
-	l, err := net.Listen("tcp", ":0")
-	if err != nil {
-		t.Error(err)
-	}
-	port := uint32(l.Addr().(*net.TCPAddr).Port)
+	port := uint32(46462)
 	testSuite := &ExampleTestSuite{
 		PostgresTestSuite: &PostgresTestSuite{PostgresConf: embeddedpostgres.DefaultConfig().Port(port)},
 		port:              port,
