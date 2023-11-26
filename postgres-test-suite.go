@@ -3,6 +3,7 @@ package postgres_test_suite
 import (
 	"os"
 	"os/signal"
+	"reflect"
 	"syscall"
 
 	embeddedpostgres "github.com/fergusstrange/embedded-postgres"
@@ -17,6 +18,7 @@ type PostgresTestSuite struct {
 }
 
 func (psuite *PostgresTestSuite) SetupSuite() {
+	psuite.T().Logf("Connection url: %s", psuite.getConf().GetConnectionURL())
 	psuite.ep = psuite.getEmbeddedPostgres()
 	err := psuite.ep.Start()
 	if err != nil {
@@ -27,6 +29,13 @@ func (psuite *PostgresTestSuite) SetupSuite() {
 
 func (psuite *PostgresTestSuite) TearDownSuite() {
 	closeEmbeddedPostgres(psuite, psuite.ep)
+}
+
+func (psuite *PostgresTestSuite) getConf() embeddedpostgres.Config {
+	if reflect.DeepEqual(psuite.PostgresConf, embeddedpostgres.Config{}) {
+		return embeddedpostgres.DefaultConfig()
+	}
+	return psuite.PostgresConf
 }
 
 func (psuite *PostgresTestSuite) getEmbeddedPostgres() *embeddedpostgres.EmbeddedPostgres {
