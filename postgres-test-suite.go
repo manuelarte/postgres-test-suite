@@ -38,6 +38,7 @@ func closeWithSignal(psuite *PostgresTestSuite, embeddedPostgres *embeddedpostgr
 	signal.Notify(c, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 	<-c
 	closeEmbeddedPostgres(psuite, embeddedPostgres)
+	close(c)
 }
 
 func closeEmbeddedPostgres(psuite *PostgresTestSuite, ep *embeddedpostgres.EmbeddedPostgres) {
