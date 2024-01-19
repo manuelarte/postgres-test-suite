@@ -25,6 +25,11 @@ func TestExampleTestSuite(t *testing.T) {
 	suite.Run(t, testSuite)
 }
 
+type ExampleTestSuite struct {
+	*PostgresTestSuite
+	port uint32
+}
+
 func (testSuite *ExampleTestSuite) Test...() {
     ctx := context.Background()
     connString := fmt.Sprintf("postgresql://%s:%s@%s:%d/%s", username, password, host, port, dbname)
