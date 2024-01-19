@@ -17,17 +17,17 @@ go get github.com/manuelarte/postgres-test-suite
 Check the example in the file [example_test.go](example_test.go):
 
 ```go
+type ExampleTestSuite struct {
+	*postgres_test_suite.PostgresTestSuite
+	port uint32
+}
+
 func TestExampleTestSuite(t *testing.T) {
 	port := // port where you want to run your postgres for testing
 	testSuite := &ExampleTestSuite{
-		PostgresTestSuite: &PostgresTestSuite{PostgresConf: embeddedpostgres.DefaultConfig().Port(port)},
+		PostgresTestSuite: &postgres_test_suite.PostgresTestSuite{PostgresConf: embeddedpostgres.DefaultConfig().Port(port)},
 	}
 	suite.Run(t, testSuite)
-}
-
-type ExampleTestSuite struct {
-	*PostgresTestSuite
-	port uint32
 }
 
 func (testSuite *ExampleTestSuite) Test...() {
